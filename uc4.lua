@@ -11,9 +11,29 @@ end
 
 function init_params()
   params:add_separator("UC4")
-  for i = 1, 8 do params:add_number("enc_" .. i, "Encoder " .. i, 0, 127, 0) end
-  for i = 1, 8 do params:add_number( "fader_" .. i, "Fader " .. i, 0, 127, 0) end
   params:add_number("xfader", "Xfader", 0, 127, 0)
+  for i = 1, 8 do
+    params:add_number("enc_" .. i, "Encoder " .. i, 0, 127, 0)
+  end
+  for i = 1, 8 do
+    params:add_number("fader_" .. i, "Fader " .. i, 0, 127, 0)
+  end
+  for i = 1, 8 do
+    params:add_binary("green_" .. i, "Green " .. i, "momentary", 0)
+    params:set_action("green_" .. i, function() green_button(i) end)
+  end
+   for i = 1, 8 do
+    params:add_binary("black_" .. i, "Black " .. i, "momentary", 0)
+    params:set_action("black_" .. i, function() black_button(i) end)
+  end 
+end
+
+function black_button(i)
+  print("Black " .. i)
+end
+
+function green_button(i)
+  print("Green " .. i)
 end
 
 function redraw_clock()
